@@ -1,0 +1,41 @@
+---
+- name: check jdk package exists
+  local_action: stat path="{{ ansible_jdk_download_dir }}/{{ ansible_jdk_package }}"
+  register: jdk_package_stat
+- name: download jdk to control machine
+  local_action: >
+    command wget -N -P "{{ansible_jdk_download_dir}}" --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/{{ansible_jdk_package_subdir}}/{{ansible_jdk_package}}
+  when: jdk_package_stat.stat.exists == False
+
+- name: install libselinux-python
+  yum: name=libselinux-python state=present
+  sudo: yes
+- name: "insure {{ansible_jdk_installation_dir}} must exist"
+  file:
+    path="{{ansible_jdk_installation_dir}}"
+    state="directory"
+  sudo: yes
+
+- name: unpacks jdk
+  unarchive:
+    src="{{ansible_jdk_download_dir}}/{{ansible_jdk_package}}"
+    dest="{{ansible_jdk_installation_dir}}"
+    creates="{{ansible_jdk_installation_dir}}/jdk{{ansible_jdk_version}}/bin/java"
+    force=no
+  sudo: yes
+
+- name: setup JAVA_HOME
+  lineinfile:
+    dest=~/.bashrc
+    line="export JAVA_HOME={{ansible_jdk_installation_dir}}/jdk{{ansible_jdk_version}}"
+    state=present
+    insertafter=EOF
+    create=true
+
+- name: append JAVA_HOME to PATH
+  lineinfile:
+    dest=~/.bashrc
+    line="export PATH=$JAVA_HOME/bin:$PATH"
+    state=present
+    insertafter=EOF
+    create=true

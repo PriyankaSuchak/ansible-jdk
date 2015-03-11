@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: semparatus
+  description: An ansible role to install jdk on CentOS.
+  company: ""
+  license: BSD
+  min_ansible_version: 1.7
+
+  platforms:
+  - name: EL
+    versions:
+    - 6
+
+  categories:
+  - system
+dependencies: []
