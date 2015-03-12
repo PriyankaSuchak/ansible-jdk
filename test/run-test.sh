@@ -1,6 +1,8 @@
 #! /bin/bash
-pushd ./test
+
+mkdir -p roles
+
 ln -sfn ../../ roles/ansible-jdk
 
-vagrant up  --provider=virtualbox
+vagrant up
 vagrant provision

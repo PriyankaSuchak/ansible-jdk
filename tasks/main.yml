@@ -7,8 +7,9 @@
     command wget -N -P "{{ansible_jdk_download_dir}}" --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/{{ansible_jdk_package_subdir}}/{{ansible_jdk_package}}
   when: jdk_package_stat.stat.exists == False
 
-- name: install libselinux-python
+- name: install libselinux-python when os family is RedHat
   yum: name=libselinux-python state=present
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
   sudo: yes
 - name: "insure {{ansible_jdk_installation_dir}} must exist"
   file:

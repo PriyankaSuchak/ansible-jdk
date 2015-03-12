@@ -1,7 +1,8 @@
 ansible-jdk
 ========
-An ansible role to install jdk on CentOS, fork from [oracle_jdk](https://github.com/alexanderjardim/oracle_jdk).
+An ansible role to install jdk on Linux, fork from [oracle_jdk](https://github.com/alexanderjardim/oracle_jdk).
 
+Currently tested on CentOS 6.5 and Ubuntu 14.04.
 
 Role Variables
 --------------
