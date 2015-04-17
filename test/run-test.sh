@@ -4,5 +4,5 @@ mkdir -p roles
 
 ln -sfn ../../ roles/ansible-jdk
 
-vagrant up
+vagrant up --no-provision
 vagrant provision

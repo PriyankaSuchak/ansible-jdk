@@ -1,7 +1,7 @@
 ---
 # defaults file for ansible-jdk
 ansible_jdk_download_dir: '~/.ansible/download'
-ansible_jdk_package: 'jdk-8u40-linux-x64.tar.gz'
-ansible_jdk_package_subdir: '8u40-b25'
-ansible_jdk_version: '1.8.0_40'
+ansible_jdk_package: 'jdk-8u45-linux-x64.tar.gz'
+ansible_jdk_package_subdir: '8u45-b14'
+ansible_jdk_version: '1.8.0_45'
 ansible_jdk_installation_dir: '/opt/jdk'
